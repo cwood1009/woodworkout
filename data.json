@@ -347,6 +347,92 @@
         "Apple + 1 tbsp nut butter"
       ]
     }
+  },
+  "snacks": {
+    "intro": "Aim for 1–2 snacks per day in the 100–200 kcal range.",
+    "categories": [
+      {
+        "name": "Protein-Focused",
+        "items": [
+          {
+            "name": "Protein bar",
+            "kcal": "170–200 kcal",
+            "notes": "Check labels; some bars hit 250+."
+          },
+          {
+            "name": "Greek yogurt (plain or light flavored)",
+            "kcal": "80–120 kcal",
+            "notes": "Best high-protein, low-calorie filler."
+          },
+          {
+            "name": "Protein shake (½ serving)",
+            "kcal": "120–150 kcal",
+            "notes": "Keep powder on hand for emergencies."
+          }
+        ]
+      },
+      {
+        "name": "Produce + Light Add-Ons",
+        "items": [
+          {
+            "name": "Apple + 1 tbsp nut butter",
+            "kcal": "150–180 kcal",
+            "notes": "Good hunger stopper; keep measured."
+          },
+          {
+            "name": "Banana",
+            "kcal": "90–110 kcal",
+            "notes": "Fast carbs before workouts."
+          },
+          {
+            "name": "Hummus + veggies",
+            "kcal": "100–150 kcal",
+            "notes": "Carrots, peppers, cucumber."
+          }
+        ]
+      },
+      {
+        "name": "Crunchy / Low-Cal",
+        "items": [
+          {
+            "name": "Air-popped popcorn",
+            "kcal": "100–120 kcal per 3 cups",
+            "notes": "Skip butter; use seasoning."
+          },
+          {
+            "name": "Rice cakes (2 plain or lightly flavored)",
+            "kcal": "70–90 kcal",
+            "notes": "Optional thin PB spread."
+          },
+          {
+            "name": "Pickles or cucumbers",
+            "kcal": "Low",
+            "notes": "Good late-night craving stopper."
+          }
+        ]
+      },
+      {
+        "name": "Higher-Satiety Treats",
+        "items": [
+          {
+            "name": "Cottage cheese bowl (fruit or salsa)",
+            "kcal": "120–150 kcal",
+            "notes": "High protein; good evening snack."
+          },
+          {
+            "name": "Light string cheese",
+            "kcal": "60–80 kcal",
+            "notes": "Pairs well with fruit."
+          },
+          {
+            "name": "Dark chocolate (1–2 squares)",
+            "kcal": "70–120 kcal",
+            "notes": "Keep to small portions."
+          }
+        ]
+      }
+    ]
   }
+
 
 }

@@ -92,76 +92,23 @@ function renderGroceryList() {
   const box = document.getElementById("groceryText");
   if (!box || !Object.keys(groceryItems).length) return;
 
-  box.textContent = buildGroceryText();
-}
-
-function buildGroceryText() {
   let text = "";
   for (const [section, items] of Object.entries(groceryItems)) {
     text += section + ":\n";
     for (const item of items) text += "• " + item + "\n";
     text += "\n";
   }
-  return text.trim();
+  box.textContent = text.trim();
 }
 
 function copyGroceryList() {
-  const text = buildGroceryText();
-  if (!text) return alert("Nothing to copy yet – please wait for the grocery list to load.");
+  const box = document.getElementById("groceryText");
+  if (!box) return;
 
-  const crlfText = text.replace(/\n/g, "\r\n");
-
-  const copyViaClipboardApi = async () => {
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(crlfText);
-        return true;
-      }
-      return false;
-    } catch (err) {
-      return false;
-    }
-  };
-
-  copyViaClipboardApi().then((handled) => {
-    if (handled) {
-      alert("Copied! Paste into Apple Reminders to create one item per line.");
-      return;
-    }
-
-    const textarea = document.createElement("textarea");
-    textarea.value = crlfText;
-    textarea.style.position = "fixed";
-    textarea.style.opacity = "0";
-    document.body.appendChild(textarea);
-    textarea.select();
-    const ok = document.execCommand("copy");
-    document.body.removeChild(textarea);
-
-    if (ok) {
-      alert("Copied! Paste into Apple Reminders to create one item per line.");
-    } else {
-      alert("Copy failed. Please try the download option instead.");
-    }
-  });
-}
-
-
-function downloadGroceryList() {
-  const text = buildGroceryText();
-  if (!text) return alert("No grocery items to download yet – please wait for the list to load.");
-
-  const crlfText = text.replace(/\n/g, "\r\n");
-  const blob = new Blob([crlfText], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "grocery-list.txt";
-  link.style.display = "none";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  navigator.clipboard
+    .writeText(box.textContent)
+    .then(() => alert("Copied! Open Reminders and paste to create your grocery list."))
+    .catch(() => alert("Copy failed — your browser may need permission."));
 }
 
 function attachNavListeners() {

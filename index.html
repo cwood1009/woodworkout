@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Weekly Weight Loss Plan – 1500 kcal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
   <style>
     /* Global layout / typography */
     html {
@@ -274,79 +275,9 @@
     <div class="desktop-calendar">
       <table id="desktopCalendar">
         <thead>
-          <tr>
-            <th class="sticky-col">Item</th>
-            <th>Mon</th>
-            <th>Tue</th>
-            <th>Wed</th>
-            <th>Thu</th>
-            <th>Fri</th>
-            <th>Sat</th>
-            <th>Sun</th>
-          </tr>
+          <!-- Filled by plan.js via Mustache -->
         </thead>
-        <tbody>
-          <tr>
-            <th class="sticky-col">Breakfast</th>
-            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
-            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
-            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
-            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
-            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
-            <td><a href="#b3">B3 – Greek Yogurt Power Bowl</a></td>
-            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
-          </tr>
-          <tr>
-            <th class="sticky-col">Lunch</th>
-            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
-            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
-            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
-            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
-            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
-            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
-            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a> (or <a href="#l2">L2</a>)</td>
-          </tr>
-          <tr>
-            <th class="sticky-col">Dinner</th>
-            <td><a href="#d-salmon">Teriyaki Salmon + Veggie Stir Fry</a></td>
-            <td><a href="#d-meatballs">Turkey Meatballs + Marinara + Roasted Veg</a></td>
-            <td><a href="#d-tacos">Fast Taco Night (lean beef)</a></td>
-            <td><a href="#d-greek-bowl">Greek Turkey Bowls</a></td>
-            <td><a href="#d-fajitas">Sheet Pan Shrimp Fajitas</a></td>
-            <td><a href="#d-flatbreads">Mini Personal Flatbreads</a></td>
-            <td><a href="#d-chili">Chili + Side Salad</a></td>
-          </tr>
-          <tr>
-            <th class="sticky-col">Snacks</th>
-            <td>Protein bar; hummus + veggies</td>
-            <td>Yogurt; apple + nut butter</td>
-            <td>Protein bar; hummus + veggies</td>
-            <td>Yogurt; apple + nut butter</td>
-            <td>Protein bar; hummus + veggies</td>
-            <td>Flexible from snack list</td>
-            <td>Light, keep room for chili</td>
-          </tr>
-          <tr>
-            <th class="sticky-col">AM Workout</th>
-            <td><a href="#workouts">Lower body + treadmill</a></td>
-            <td><a href="#workouts">Upper body + treadmill</a></td>
-            <td><a href="#workouts">Full body + short core</a></td>
-            <td><a href="#workouts">Lower + treadmill intervals</a></td>
-            <td><a href="#workouts">Upper + light treadmill</a></td>
-            <td><a href="#workouts">Intervals + longer core</a></td>
-            <td><a href="#workouts">Easy walk + light core</a></td>
-          </tr>
-          <tr>
-            <th class="sticky-col">PM / Extra</th>
-            <td><a href="#workouts">Optional core (10–15 min)</a></td>
-            <td><a href="#workouts">Optional walk/mobility</a></td>
-            <td>Rest (busy)</td>
-            <td><a href="#workouts">Optional core</a></td>
-            <td>Rest (busy)</td>
-            <td>Optional family walk</td>
-            <td>Rest + meal prep</td>
-          </tr>
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
 
@@ -739,6 +670,53 @@
     </table>
   </section>
 </main>
+
+<script id="desktop-calendar-head-template" type="x-tmpl-mustache">
+  <tr>
+    <th class="sticky-col">Item</th>
+    {{#days}}
+    <th>{{name}}</th>
+    {{/days}}
+  </tr>
+</script>
+
+<script id="desktop-calendar-body-template" type="x-tmpl-mustache">
+  {{#rows}}
+  <tr>
+    <th class="sticky-col">{{label}}</th>
+    {{#cells}}
+    <td>{{{.}}}</td>
+    {{/cells}}
+  </tr>
+  {{/rows}}
+</script>
+
+<script id="mobile-day-template" type="x-tmpl-mustache">
+  <details open>
+    <summary>Breakfast</summary>
+    <p>{{{breakfast}}}</p>
+  </details>
+  <details>
+    <summary>Lunch</summary>
+    <p>{{{lunch}}}</p>
+  </details>
+  <details>
+    <summary>Dinner</summary>
+    <p>{{{dinner}}}</p>
+  </details>
+  <details>
+    <summary>Snacks</summary>
+    <p>{{snacks}}</p>
+  </details>
+  <details>
+    <summary>AM Workout</summary>
+    <p>{{am}} <br><a href="#workouts">See workout plan</a></p>
+  </details>
+  <details>
+    <summary>PM / Extra</summary>
+    <p>{{pm}} <br><a href="#workouts">See workout plan</a></p>
+  </details>
+</script>
 
 <!-- Data + calendar logic -->
 <script src="plan.js"></script>

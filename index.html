@@ -537,12 +537,24 @@
   <h2>Grocery List</h2>
   <p>Auto-generated from this week's meals.</p>
 
-  <button onclick="copyGroceryList()" 
-          style="background:#2563eb;color:white;border:0;
-                 padding:6px 14px;border-radius:8px;
-                 cursor:pointer;margin-bottom:12px;">
-    Copy to Reminders
-  </button>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+    <button onclick="copyGroceryList()"
+            style="background:#2563eb;color:white;border:0;
+                   padding:6px 14px;border-radius:8px;
+                   cursor:pointer;">
+      Copy to Reminders
+    </button>
+    <button onclick="downloadGroceryList()"
+            style="background:#0ea5e9;color:white;border:0;
+                   padding:6px 14px;border-radius:8px;
+                   cursor:pointer;">
+      Download as .txt
+    </button>
+  </div>
+  <p style="margin-top:0;font-size:0.9rem;color:#cbd5e1;">
+    Each line will paste as its own reminder. The download gives you a plain text file
+    you can drag into Reminders if copy/paste is blocked.
+  </p>
 
   <pre id="groceryText" style="
       white-space: pre-wrap;

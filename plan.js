@@ -92,57 +92,23 @@ function renderGroceryList() {
   const box = document.getElementById("groceryText");
   if (!box || !Object.keys(groceryItems).length) return;
 
-  box.textContent = buildGroceryText();
-}
-
-function buildGroceryText() {
   let text = "";
   for (const [section, items] of Object.entries(groceryItems)) {
     text += section + ":\n";
     for (const item of items) text += "• " + item + "\n";
     text += "\n";
   }
-  return text.trim();
+  box.textContent = text.trim();
 }
 
 function copyGroceryList() {
-  const text = buildGroceryText();
-  const crlfText = text.replace(/\n/g, "\r\n");
+  const box = document.getElementById("groceryText");
+  if (!box) return;
 
-  if (navigator.clipboard && window.ClipboardItem) {
-    const blob = new Blob([crlfText], { type: "text/plain" });
-    const item = new ClipboardItem({ "text/plain": blob });
-
-    navigator.clipboard
-      .write([item])
-      .then(() => alert("Copied! Paste into Apple Reminders to create one item per line."))
-      .catch(() => fallbackCopy(text));
-  } else {
-    fallbackCopy(text);
-  }
-}
-
-function fallbackCopy(text) {
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textarea);
-  alert("Copied! Paste into Apple Reminders to create one item per line.");
-}
-
-function downloadGroceryList() {
-  const text = buildGroceryText().replace(/\n/g, "\r\n");
-  const blob = new Blob([text], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "grocery-list.txt";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  navigator.clipboard
+    .writeText(box.textContent)
+    .then(() => alert("Copied! Open Reminders and paste to create your grocery list."))
+    .catch(() => alert("Copy failed — your browser may need permission."));
 }
 
 function attachNavListeners() {

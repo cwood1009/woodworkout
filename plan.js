@@ -88,14 +88,13 @@ function renderRecipes() {
     });
   }
 
-  // Snacks
-  const sTplEl = document.getElementById("snacks-template");
-  const sListEl = document.getElementById("snacksList");
-  if (sTplEl && sListEl && r.snacks) {
-    sListEl.innerHTML = Mustache.render(sTplEl.innerHTML, {
-      snacks: r.snacks
-    });
-  }
+    // Snacks
+    const sTplEl = document.getElementById("snacks-template");
+    const sListEl = document.getElementById("snacksList");
+    if (sTplEl && sListEl && r.snacks) {
+    sListEl.innerHTML = Mustache.render(sTplEl.innerHTML, r.snacks);
+    }
+
 }
 
 function renderDesktopCalendar() {

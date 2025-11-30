@@ -109,5 +109,244 @@
       "Olive oil",
       "Salt, pepper, oregano, cumin, paprika"
     ]
+  },
+  "recipes": {
+    "breakfasts": [
+      {
+        "id": "b1",
+        "title": "B1 – Banana Protein Shake",
+        "kcal": "~350 kcal • ~25–30g protein",
+        "ingredients": [
+          "1 medium banana (fresh or frozen)",
+          "1 scoop whey or similar protein powder",
+          "1 tbsp peanut butter or 2 tbsp PB powder",
+          "1/2 cup oats",
+          "1 cup unsweetened almond milk",
+          "Ice + water to texture"
+        ],
+        "steps": [
+          "Add all ingredients to blender.",
+          "Blend until smooth and thick. Adjust with water/ice as needed."
+        ]
+      },
+      {
+        "id": "b2",
+        "title": "B2 – Warm Protein Oats",
+        "kcal": "~350–375 kcal • ~25–30g protein",
+        "ingredients": [
+          "1/2 cup oats",
+          "1 scoop vanilla or cinnamon protein powder",
+          "1/2 banana (sliced) or 1/2 cup berries",
+          "1 tsp brown sugar or sweetener (optional)",
+          "1 tsp chia or ground flax (optional)",
+          "Water or almond milk to cook"
+        ],
+        "steps": [
+          "Cook oats with water or almond milk per package directions.",
+          "Remove from heat, stir in protein powder thoroughly.",
+          "Top with fruit and chia/flax; add sweetener if desired."
+        ]
+      },
+      {
+        "id": "b3",
+        "title": "B3 – Greek Yogurt Power Bowl",
+        "kcal": "~350–380 kcal • ~25–30g protein",
+        "ingredients": [
+          "3/4–1 cup non-fat Greek yogurt",
+          "1/2 cup berries or sliced fruit",
+          "2 tbsp granola or crushed cereal",
+          "1 tbsp chopped nuts or seeds",
+          "Optional: drizzle of honey or sugar-free syrup"
+        ],
+        "steps": [
+          "Add yogurt to a bowl.",
+          "Top with fruit, then granola and nuts/seeds.",
+          "Drizzle a small amount of honey or syrup if desired."
+        ]
+      }
+    ],
+    "lunches": [
+      {
+        "id": "l1",
+        "title": "L1 – Turkey Enchilada Skillet Bowls",
+        "kcal": "~420 kcal per serving • ~45g protein",
+        "servings": 5,
+        "ingredients": [
+          "2.5–3 lbs 93% lean ground turkey",
+          "2 cups cooked rice (about 1 cup dry)",
+          "2 cans black beans, rinsed",
+          "1 can fire-roasted diced tomatoes",
+          "1 can red enchilada sauce (~10 oz)",
+          "2 cups frozen corn (or 1 can, drained)",
+          "1 large onion, diced",
+          "2–3 tbsp taco seasoning (or chili powder, cumin, garlic, paprika, salt)",
+          "1 cup light Mexican cheese",
+          "Optional: cilantro, green onion, jalapeño, lime"
+        ],
+        "steps": [
+          "Cook rice and set aside.",
+          "In a large skillet, sauté diced onion until soft.",
+          "Add ground turkey and cook until browned; drain excess fat if needed.",
+          "Stir in taco seasoning and cook 1–2 minutes.",
+          "Add black beans, tomatoes, corn, and enchilada sauce; simmer 5–10 minutes.",
+          "Stir in cooked rice and adjust seasoning to taste.",
+          "Turn off heat, sprinkle cheese over the top, and cover for 3–5 minutes to melt.",
+          "Divide evenly into 5 containers. Add cilantro and green onion if using.",
+          "Serving: reheat and eat as-is or with shredded lettuce on the side."
+        ]
+      },
+      {
+        "id": "l2",
+        "title": "L2 – Mediterranean Lentil Bowls",
+        "kcal": "~400–430 kcal per serving • ~20–25g protein • high fiber",
+        "servings": 5,
+        "ingredients": [
+          "2 cups dry lentils (green or brown), rinsed",
+          "4 cups low-sodium broth + water as needed",
+          "1 large onion, diced",
+          "3 cloves garlic, minced",
+          "1–2 bell peppers, diced",
+          "1 cucumber, diced (kept separate until serving)",
+          "1–2 cups cherry tomatoes, halved",
+          "1/2 cup crumbled feta (optional)",
+          "2–3 tbsp olive oil total",
+          "Juice of 1–2 lemons",
+          "Seasoning: oregano, cumin, salt, pepper, paprika"
+        ],
+        "steps": [
+          "In a pot, sauté onion and garlic in a bit of olive oil until softened.",
+          "Add lentils and broth; bring to a boil, then simmer until tender (about 20–25 minutes). Add water if needed.",
+          "Stir in diced bell peppers and seasonings; cook a few more minutes.",
+          "Turn off heat, stir in lemon juice and 1–2 tbsp olive oil.",
+          "Let cool slightly, then portion lentils into 5 containers.",
+          "Top each with tomatoes, cucumber, and a bit of feta, or add fresh at serving.",
+          "Serving: eat warm or at room temperature, with an extra squeeze of lemon if desired."
+        ]
+      }
+    ],
+    "dinners": [
+      {
+        "id": "d-salmon",
+        "title": "Teriyaki Salmon + Veggie Stir Fry",
+        "kcal": "~500 kcal per person",
+        "ingredients": [
+          "5–6 oz salmon per person",
+          "Stir-fry vegetables (broccoli, carrots, snap peas, etc.)",
+          "2–3 tbsp light teriyaki sauce total",
+          "Optional: small serving of rice (adjust calories as needed)"
+        ],
+        "steps": [
+          "Roast or pan-sear salmon for about 10–12 minutes depending on thickness, until cooked through.",
+          "Stir-fry vegetables in a pan with a little oil or spray; add teriyaki sauce in the last minute.",
+          "Serve salmon over the veggies and drizzle with any remaining sauce."
+        ]
+      },
+      {
+        "id": "d-meatballs",
+        "title": "Turkey Meatballs + Marinara + Roasted Veg",
+        "kcal": "~450–500 kcal per person",
+        "ingredients": [
+          "5–6 turkey meatballs per person (store-bought or homemade)",
+          "1–1.5 cups roasted vegetables (zucchini, mushrooms, peppers)",
+          "1/2–3/4 cup marinara sauce",
+          "Optional: sprinkle of Parmesan"
+        ],
+        "steps": [
+          "Bake or pan-cook turkey meatballs according to package or recipe instructions.",
+          "Roast vegetables on a sheet pan at 400°F until tender and browned.",
+          "Warm marinara sauce and pour over meatballs; serve with roasted vegetables and optional Parmesan."
+        ]
+      },
+      {
+        "id": "d-tacos",
+        "title": "Fast Taco Night (Lean Beef)",
+        "kcal": "~450–480 kcal per person (depends on tortillas and toppings)",
+        "ingredients": [
+          "~1/2 lb lean ground beef shared between two (or 4–5 oz each cooked)",
+          "Lettuce cups or small tortillas",
+          "Salsa, onion, cilantro, shredded lettuce",
+          "Optional: light cheese, Greek yogurt instead of sour cream"
+        ],
+        "steps": [
+          "Brown lean ground beef in a skillet and season with taco seasoning.",
+          "Serve in lettuce cups or tortillas with salsa, onion, cilantro, shredded lettuce, and optional light cheese or Greek yogurt."
+        ]
+      },
+      {
+        "id": "d-greek-bowl",
+        "title": "Greek Turkey Bowls",
+        "kcal": "~480 kcal per person",
+        "ingredients": [
+          "5–6 oz cooked turkey (grilled or pan-cooked)",
+          "1/2 cup cooked rice per person",
+          "Tomato, cucumber, red onion (diced)",
+          "2 tbsp tzatziki per person",
+          "Optional: olives and a bit of feta"
+        ],
+        "steps": [
+          "Cook turkey with simple seasoning (salt, pepper, garlic, oregano) if not already cooked.",
+          "Layer bowls with rice, turkey, chopped tomato, cucumber, red onion, tzatziki, and optional olives or feta."
+        ]
+      },
+      {
+        "id": "d-fajitas",
+        "title": "Sheet Pan Shrimp Fajitas",
+        "kcal": "~450 kcal per person (with 2 small tortillas)",
+        "ingredients": [
+          "Shrimp (~6–8 oz per person), peeled and deveined",
+          "Sliced bell peppers and onions",
+          "Fajita seasoning, oil or spray",
+          "Small tortillas or lettuce wraps"
+        ],
+        "steps": [
+          "Preheat oven to 400°F.",
+          "Toss shrimp and vegetables with a little oil or spray and fajita seasoning.",
+          "Spread on a sheet pan and roast 8–12 minutes, until shrimp are opaque and vegetables are tender.",
+          "Serve in tortillas or lettuce wraps with salsa and lime if desired."
+        ]
+      },
+      {
+        "id": "d-flatbreads",
+        "title": "Mini Personal Flatbreads",
+        "kcal": "~500 kcal per person (depends on base)",
+        "ingredients": [
+          "1 small naan or lavash per person",
+          "2–3 tbsp marinara per flatbread",
+          "1/4–1/3 cup light mozzarella",
+          "Turkey pepperoni or cooked turkey sausage",
+          "Optional: vegetables (mushrooms, peppers, onions)"
+        ],
+        "steps": [
+          "Preheat oven to 400°F.",
+          "Top naan or lavash with marinara, mozzarella, turkey pepperoni or sausage, and any vegetables.",
+          "Bake 8–10 minutes until the base is crisp and the cheese is melted and bubbling."
+        ]
+      },
+      {
+        "id": "d-chili",
+        "title": "Chili + Side Salad",
+        "kcal": "~500 kcal per person",
+        "ingredients": [
+          "Lean ground turkey or beef",
+          "Canned tomatoes, beans, onions, chili seasoning",
+          "Side salad with light dressing"
+        ],
+        "steps": [
+          "Cook ground meat with diced onions until browned; drain if needed.",
+          "Add canned tomatoes, beans, and chili seasoning; simmer until flavors come together.",
+          "Serve a hearty bowl of chili with a simple side salad and light dressing."
+        ]
+      }
+    ],
+    "snacks": {
+      "intro": "Aim for 1–2 snacks per day in the 100–200 kcal range.",
+      "items": [
+        "Protein bar (check label, many are 170–200 kcal)",
+        "Hummus + veggies (carrots, peppers, cucumber)",
+        "Greek yogurt (plain or light flavored)",
+        "Apple + 1 tbsp nut butter"
+      ]
+    }
   }
+
 }

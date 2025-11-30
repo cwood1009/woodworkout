@@ -1,151 +1,267 @@
-let weekPlan = [];
-let groceryItems = {};
+// plan.js
+
+let appData = null;
+let groceryTextData = "";
 let currentDayIndex = 0;
 
-function getTodayIndex() {
-  const jsDay = new Date().getDay();
-  const map = { 1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 0: 6 };
-  return map[jsDay] ?? 0;
-}
+document.addEventListener("DOMContentLoaded", () => {
+  // Load data.json (weekPlan + groceryItems)
+  fetch("data.json")
+    .then((res) => {
+      if (!res.ok) throw new Error("Failed to load data.json");
+      return res.json();
+    })
+    .then((data) => {
+      appData = data;
+      renderDesktopCalendar();
+      renderMobileDay(0); // Monday
+      renderGroceryList();
+      renderRecipes();
+    })
+    .catch((err) => {
+      console.error(err);
+      const calendar = document.getElementById("desktopCalendar");
+      if (calendar) {
+        calendar.insertAdjacentHTML(
+          "afterend",
+          `<p style="color:#fca5a5;">Error loading data.json. Check path or host via HTTP (not file://).</p>`
+        );
+      }
+    });
 
-function linkOrText(item) {
-  if (!item) return "";
-  if (typeof item === "string") return item;
-  if (item.anchor) return `<a href="${item.anchor}">${item.label}</a>`;
-  return item.label || "";
-}
-
-function renderDesktopCalendar() {
-  const table = document.getElementById("desktopCalendar");
-  if (!table || !weekPlan.length) return;
-
-  const headTemplate = document.getElementById("desktop-calendar-head-template")?.innerHTML || "";
-  const bodyTemplate = document.getElementById("desktop-calendar-body-template")?.innerHTML || "";
-
-  const headerHtml = Mustache.render(headTemplate, { days: weekPlan });
-
-  const categories = [
-    { label: "Breakfast", key: "breakfast" },
-    { label: "Lunch", key: "lunch" },
-    { label: "Dinner", key: "dinner" },
-    { label: "Snacks", key: "snacks" },
-    { label: "AM Workout", key: "am" },
-    { label: "PM / Extra", key: "pm" }
-  ];
-
-  const rows = categories.map((cat) => ({
-    label: cat.label,
-    cells: weekPlan.map((day) => linkOrText(day[cat.key]))
-  }));
-
-  const bodyHtml = Mustache.render(bodyTemplate, { rows });
-
-  table.querySelector("thead").innerHTML = headerHtml;
-  table.querySelector("tbody").innerHTML = bodyHtml;
-  highlightTodayColumn();
-}
-
-function renderMobileDay() {
-  const day = weekPlan[currentDayIndex];
-  const titleEl = document.getElementById("mobileDayTitle");
-  const contentEl = document.getElementById("mobileDayContent");
-  const template = document.getElementById("mobile-day-template")?.innerHTML || "";
-
-  if (!day || !titleEl || !contentEl) return;
-
-  titleEl.textContent = day.name;
-
-  const html = Mustache.render(template, {
-    breakfast: linkOrText(day.breakfast),
-    lunch: linkOrText(day.lunch),
-    dinner: linkOrText(day.dinner),
-    snacks: day.snacks,
-    am: day.am,
-    pm: day.pm
-  });
-
-  contentEl.innerHTML = html;
-}
-
-function highlightTodayColumn() {
-  const table = document.getElementById("desktopCalendar");
-  if (!table) return;
-
-  const today = getTodayIndex();
-  const colIndex = today + 1;
-
-  const headerRow = table.tHead?.rows[0];
-  if (headerRow && headerRow.cells[colIndex]) {
-    headerRow.cells[colIndex].classList.add("today-header");
-  }
-
-  const rows = table.tBodies[0]?.rows || [];
-  for (let r = 0; r < rows.length; r++) {
-    const cell = rows[r].cells[colIndex];
-    if (cell) {
-      cell.classList.add("today-col");
-    }
-  }
-}
-
-function renderGroceryList() {
-  const box = document.getElementById("groceryText");
-  if (!box || !Object.keys(groceryItems).length) return;
-
-  let text = "";
-  for (const [section, items] of Object.entries(groceryItems)) {
-    text += section + ":\n";
-    for (const item of items) text += "• " + item + "\n";
-    text += "\n";
-  }
-  box.textContent = text.trim();
-}
-
-function copyGroceryList() {
-  const box = document.getElementById("groceryText");
-  if (!box) return;
-
-  navigator.clipboard
-    .writeText(box.textContent)
-    .then(() => alert("Copied! Open Reminders and paste to create your grocery list."))
-    .catch(() => alert("Copy failed — your browser may need permission."));
-}
-
-function attachNavListeners() {
+  // Hook up mobile day navigation
   const prevBtn = document.getElementById("prevDayBtn");
   const nextBtn = document.getElementById("nextDayBtn");
 
   if (prevBtn) {
-    prevBtn.addEventListener("click", function () {
-      currentDayIndex = (currentDayIndex - 1 + weekPlan.length) % weekPlan.length;
-      renderMobileDay();
+    prevBtn.addEventListener("click", () => {
+      if (!appData) return;
+      const len = appData.weekPlan.length;
+      currentDayIndex = (currentDayIndex - 1 + len) % len;
+      renderMobileDay(currentDayIndex);
     });
   }
 
   if (nextBtn) {
-    nextBtn.addEventListener("click", function () {
-      currentDayIndex = (currentDayIndex + 1) % weekPlan.length;
-      renderMobileDay();
+    nextBtn.addEventListener("click", () => {
+      if (!appData) return;
+      const len = appData.weekPlan.length;
+      currentDayIndex = (currentDayIndex + 1) % len;
+      renderMobileDay(currentDayIndex);
+    });
+  }
+
+  // Expose copy/download for inline onclick handlers
+  window.copyGroceryList = copyGroceryList;
+  window.downloadGroceryList = downloadGroceryList;
+});
+
+// ---------- Desktop calendar ----------
+function renderRecipes() {
+  if (!appData || !appData.recipes) return;
+  const r = appData.recipes;
+
+  // Breakfasts
+  const bTplEl = document.getElementById("breakfast-template");
+  const bListEl = document.getElementById("breakfastList");
+  if (bTplEl && bListEl && r.breakfasts) {
+    bListEl.innerHTML = Mustache.render(bTplEl.innerHTML, {
+      breakfasts: r.breakfasts
+    });
+  }
+
+  // Lunches
+  const lTplEl = document.getElementById("lunch-template");
+  const lListEl = document.getElementById("lunchList");
+  if (lTplEl && lListEl && r.lunches) {
+    lListEl.innerHTML = Mustache.render(lTplEl.innerHTML, {
+      lunches: r.lunches
+    });
+  }
+
+  // Dinners
+  const dTplEl = document.getElementById("dinner-template");
+  const dListEl = document.getElementById("dinnerList");
+  if (dTplEl && dListEl && r.dinners) {
+    dListEl.innerHTML = Mustache.render(dTplEl.innerHTML, {
+      dinners: r.dinners
+    });
+  }
+
+  // Snacks
+  const sTplEl = document.getElementById("snacks-template");
+  const sListEl = document.getElementById("snacksList");
+  if (sTplEl && sListEl && r.snacks) {
+    sListEl.innerHTML = Mustache.render(sTplEl.innerHTML, {
+      snacks: r.snacks
     });
   }
 }
 
-function bootstrapPlan(data) {
-  weekPlan = data.weekPlan || [];
-  groceryItems = data.groceryItems || {};
-  currentDayIndex = getTodayIndex();
+function renderDesktopCalendar() {
+  if (!appData) return;
+  const weekPlan = appData.weekPlan;
 
-  renderDesktopCalendar();
-  renderMobileDay();
-  renderGroceryList();
-  attachNavListeners();
+  const headTpl = document.getElementById(
+    "desktop-calendar-head-template"
+  ).innerHTML;
+  const bodyTpl = document.getElementById(
+    "desktop-calendar-body-template"
+  ).innerHTML;
+
+  const headHtml = Mustache.render(headTpl, {
+    days: weekPlan.map((d) => ({ name: d.name })),
+  });
+
+  const rows = [
+    {
+      label: "Breakfast",
+      cells: weekPlan.map(
+        (d) =>
+          `<a href="${d.breakfast.anchor}">${d.breakfast.label}</a>`
+      ),
+    },
+    {
+      label: "Lunch",
+      cells: weekPlan.map(
+        (d) => `<a href="${d.lunch.anchor}">${d.lunch.label}</a>`
+      ),
+    },
+    {
+      label: "Dinner",
+      cells: weekPlan.map(
+        (d) => `<a href="${d.dinner.anchor}">${d.dinner.label}</a>`
+      ),
+    },
+    {
+      label: "Snacks",
+      cells: weekPlan.map((d) => d.snacks || ""),
+    },
+    {
+      label: "AM Workout",
+      cells: weekPlan.map((d) => d.am || ""),
+    },
+    {
+      label: "PM / Extra",
+      cells: weekPlan.map((d) => d.pm || ""),
+    },
+  ];
+
+  const bodyHtml = Mustache.render(bodyTpl, { rows });
+
+  const table = document.getElementById("desktopCalendar");
+  if (!table) return;
+
+  const thead = table.querySelector("thead");
+  const tbody = table.querySelector("tbody");
+  if (thead) thead.innerHTML = headHtml;
+  if (tbody) tbody.innerHTML = bodyHtml;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  fetch("data.json")
-    .then((response) => response.json())
-    .then((data) => bootstrapPlan(data))
-    .catch((error) => {
-      console.error("Failed to load plan data", error);
+// ---------- Mobile single-day view ----------
+
+function renderMobileDay(index) {
+  if (!appData) return;
+  const day = appData.weekPlan[index];
+  if (!day) return;
+
+  const tpl = document.getElementById("mobile-day-template").innerHTML;
+
+  const context = {
+    breakfast: `<a href="${day.breakfast.anchor}">${day.breakfast.label}</a>`,
+    lunch: `<a href="${day.lunch.anchor}">${day.lunch.label}</a>`,
+    dinner: `<a href="${day.dinner.anchor}">${day.dinner.label}</a>`,
+    snacks: day.snacks || "",
+    am: day.am || "",
+    pm: day.pm || "",
+  };
+
+  const html = Mustache.render(tpl, context);
+
+  const titleEl = document.getElementById("mobileDayTitle");
+  const contentEl = document.getElementById("mobileDayContent");
+
+  if (titleEl) titleEl.textContent = day.name;
+  if (contentEl) contentEl.innerHTML = html;
+}
+
+// ---------- Grocery list ----------
+
+function renderGroceryList() {
+  if (!appData) return;
+  const grocery = appData.groceryItems || {};
+  const lines = [];
+
+  Object.keys(grocery).forEach((category) => {
+    const items = grocery[category] || [];
+    if (!items.length) return;
+    lines.push(category + ":");
+    items.forEach((item) => {
+      lines.push("- " + item);
     });
-});
+    lines.push(""); // blank line between categories
+  });
+
+  groceryTextData = lines.join("\n").trim();
+
+  const pre = document.getElementById("groceryText");
+  if (pre) {
+    pre.textContent = groceryTextData;
+  }
+}
+
+// ---------- Copy / Download handlers ----------
+
+function copyGroceryList() {
+  if (!groceryTextData) {
+    alert("Grocery list not ready yet. Try again in a second.");
+    return;
+  }
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard
+      .writeText(groceryTextData)
+      .then(() => {
+        alert("Grocery list copied. Paste into Reminders or Notes.");
+      })
+      .catch((err) => {
+        console.error(err);
+        fallbackCopy(groceryTextData);
+      });
+  } else {
+    fallbackCopy(groceryTextData);
+  }
+}
+
+function fallbackCopy(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand("copy");
+    alert("Grocery list copied. Paste into Reminders or Notes.");
+  } catch (e) {
+    alert("Could not copy automatically. Select and copy manually.");
+  }
+  document.body.removeChild(textarea);
+}
+
+function downloadGroceryList() {
+  if (!groceryTextData) {
+    alert("Grocery list not ready yet. Try again in a second.");
+    return;
+  }
+
+  const blob = new Blob([groceryTextData], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "grocery-list.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}

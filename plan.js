@@ -92,74 +92,23 @@ function renderGroceryList() {
   const box = document.getElementById("groceryText");
   if (!box || !Object.keys(groceryItems).length) return;
 
-  box.textContent = buildGroceryText();
-}
-
-function buildGroceryText() {
-  const lines = [];
-
+  let text = "";
   for (const [section, items] of Object.entries(groceryItems)) {
-    lines.push(section + ":");
-    for (const item of items) lines.push("• " + item);
-    lines.push("");
+    text += section + ":\n";
+    for (const item of items) text += "• " + item + "\n";
+    text += "\n";
   }
-
-  // Use CRLF directly to avoid later normalization steps that can break copying
-  // in browsers that treat \n conversion differently (e.g., Apple platforms).
-  return lines.join("\r\n").trim();
+  box.textContent = text.trim();
 }
 
-async function copyGroceryList() {
-  const text = buildGroceryText();
-  if (!text) return alert("Nothing to copy yet – please wait for the grocery list to load.");
+function copyGroceryList() {
+  const box = document.getElementById("groceryText");
+  if (!box) return;
 
-  // Prefer the modern Clipboard API. If it fails (permissions, insecure
-  // context, unsupported browser), fall back to an offscreen textarea.
-  try {
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(text);
-      alert("Copied! Paste into Apple Reminders to create one item per line.");
-      return;
-    }
-  } catch (error) {
-    console.warn("Clipboard API copy failed, falling back", error);
-  }
-
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.setAttribute("aria-hidden", "true");
-  textarea.style.position = "fixed";
-  textarea.style.opacity = "0";
-  textarea.style.pointerEvents = "none";
-  document.body.appendChild(textarea);
-  textarea.focus({ preventScroll: true });
-  textarea.select();
-  textarea.setSelectionRange(0, textarea.value.length);
-  const ok = document.execCommand("copy");
-  document.body.removeChild(textarea);
-
-  if (ok) {
-    alert("Copied! Paste into Apple Reminders to create one item per line.");
-  } else {
-    alert("Copy failed. Please try the download option instead.");
-  }
-}
-
-
-function downloadGroceryList() {
-  const text = buildGroceryText();
-  if (!text) return alert("No grocery items to download yet – please wait for the list to load.");
-
-  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "grocery-list.txt";
-  link.style.display = "none";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  navigator.clipboard
+    .writeText(box.textContent)
+    .then(() => alert("Copied! Open Reminders and paste to create your grocery list."))
+    .catch(() => alert("Copy failed — your browser may need permission."));
 }
 
 function attachNavListeners() {

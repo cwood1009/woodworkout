@@ -64,52 +64,66 @@
       "pm": "Rest + meal prep."
     }
   ],
-  "groceryItems": {
-    "Produce": [
-      "10–12 bananas",
-      "3–4 cups berries",
-      "3 cucumbers",
-      "2 pints cherry tomatoes",
-      "6–8 bell peppers",
-      "5–6 onions",
-      "1–2 bulbs garlic",
-      "1 bunch cilantro (optional)",
-      "2–3 limes",
-      "2–3 lemons",
-      "Bag of shredded lettuce"
-    ],
-    "Meat / Seafood": [
-      "3 lbs lean ground turkey (L1)",
-      "1 lb lean ground beef (tacos)",
-      "2 salmon fillets (Mon dinner)",
-      "1 lb shrimp (Fri dinner)",
-      "Turkey meatballs (Tue dinner)",
-      "Turkey sausage or turkey pepperoni (flatbreads)"
-    ],
-    "Dairy": [
-      "Light Mexican cheese (L1)",
-      "Feta (L2 optional)",
-      "Light mozzarella (flatbreads)",
-      "Greek yogurt (breakfast + snacks)",
-      "Tzatziki (Greek bowls)"
-    ],
-    "Pantry": [
-      "Protein powder",
-      "Rolled oats",
-      "Rice (2–3 cups uncooked)",
-      "Black beans (2 cans)",
-      "Lentils (2 cups dry)",
-      "Fire-roasted tomatoes (1 can)",
-      "Enchilada sauce (1 can)",
-      "Marinara (1 jar)",
-      "Corn (frozen or canned)",
-      "Naan or lavash (flatbreads)",
-      "Taco seasoning",
-      "Chili seasoning",
-      "Olive oil",
-      "Salt, pepper, oregano, cumin, paprika"
-    ]
-  },
+"groceryItems": {
+  "Produce": [
+    "Bananas (10–12)",
+    "Berries (3–4 cups)",
+    "Apples (6–8)",
+    "Bell peppers (4–5 total)",
+    "Onions (3–4)",
+    "Carrots (2–3)",
+    "Zucchini (1–2)",
+    "Broccoli (1 head)",
+    "Mushrooms (8–12 oz)",
+    "Snap peas (1 bag, optional)",
+    "Cucumber (2)",
+    "Cherry tomatoes (1–2 pints)",
+    "Lettuce / greens for bowls and side salads",
+    "Lemons (3–4)"
+  ],
+  "Meat / Seafood": [
+    "3 lbs lean ground turkey (L1)",
+    "1 lb lean ground beef (tacos)",
+    "1 lb extra lean turkey or beef (for chili)",
+    "1 lb additional turkey breast / cutlets (for Greek bowls, optional)",
+    "2 salmon fillets (Mon dinner)",
+    "1 lb shrimp (Fri dinner)",
+    "Turkey meatballs (Tue dinner)",
+    "Turkey sausage or turkey pepperoni (flatbreads)"
+  ],
+  "Dairy": [
+    "Light Mexican cheese (L1)",
+    "Feta (L2 optional)",
+    "Light mozzarella (flatbreads)",
+    "Greek yogurt (breakfast + snacks)",
+    "Tzatziki (Greek bowls)"
+  ],
+  "Pantry": [
+    "Unsweetened almond milk (2 cartons)",
+    "Protein powder",
+    "Peanut or almond butter",
+    "Granola (light / high-fiber)",
+    "Mixed nuts or seeds",
+    "Chia or ground flax (optional)",
+    "Rolled oats",
+    "Rice (2–3 cups uncooked)",
+    "Quinoa (small bag, if using)",
+    "Black beans (2 cans for L1 + 2 cans for chili = 4 cans)",
+    "Lentils (2 cups dry)",
+    "Fire-roasted diced tomatoes (1 can for L1 + 2 extra for chili = 3 cans)",
+    "Enchilada sauce (1 can)",
+    "Marinara (1 jar)",
+    "Corn (frozen or canned)",
+    "Naan or lavash (flatbreads)",
+    "Small/medium tortillas (1–2 packs)",
+    "Salsa (1–2 jars)",
+    "Low-sodium broth (1 carton)",
+    "Taco seasoning",
+    "Chili seasoning",
+    "Olive oil",
+    "Salt, pepper, oregano, cumin, paprika"
+  ]
+},
   "recipes": {
     "breakfasts": [
       {

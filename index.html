@@ -187,6 +187,13 @@
       margin-top: 4px;
       font-size: 0.9rem;
     }
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -249,33 +256,33 @@
         <tbody>
           <tr>
             <th class="sticky-col">Breakfast</th>
-            <td>B1 – Banana Protein Shake</td>
-            <td>B2 – Warm Protein Oats</td>
-            <td>B1 – Banana Protein Shake</td>
-            <td>B2 – Warm Protein Oats</td>
-            <td>B1 – Banana Protein Shake</td>
-            <td>B3 – Greek Yogurt Power Bowl</td>
-            <td>B2 – Warm Protein Oats</td>
+            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
+            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
+            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
+            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
+            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
+            <td><a href="#b3">B3 – Greek Yogurt Power Bowl</a></td>
+            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
           </tr>
           <tr>
             <th class="sticky-col">Lunch</th>
-            <td>L1 – Turkey Enchilada Skillet Bowl</td>
-            <td>L2 – Mediterranean Lentil Bowl</td>
-            <td>L1 – Turkey Enchilada Skillet Bowl</td>
-            <td>L2 – Mediterranean Lentil Bowl</td>
-            <td>L1 – Turkey Enchilada Skillet Bowl</td>
-            <td>L2 – Mediterranean Lentil Bowl</td>
-            <td>L1 – Turkey Enchilada Skillet Bowl (or L2)</td>
+            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
+            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
+            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
+            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
+            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
+            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
+            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a> (or <a href="#l2">L2</a>)</td>
           </tr>
           <tr>
             <th class="sticky-col">Dinner</th>
-            <td>Teriyaki Salmon + Veggie Stir Fry</td>
-            <td>Turkey Meatballs + Marinara + Roasted Veg</td>
-            <td>Fast Taco Night (lean beef)</td>
-            <td>Greek Turkey Bowls</td>
-            <td>Sheet Pan Shrimp Fajitas</td>
-            <td>Mini Personal Flatbreads</td>
-            <td>Chili + Side Salad</td>
+            <td><a href="#d-salmon">Teriyaki Salmon + Veggie Stir Fry</a></td>
+            <td><a href="#d-meatballs">Turkey Meatballs + Marinara + Roasted Veg</a></td>
+            <td><a href="#d-tacos">Fast Taco Night (lean beef)</a></td>
+            <td><a href="#d-greek-bowl">Greek Turkey Bowls</a></td>
+            <td><a href="#d-fajitas">Sheet Pan Shrimp Fajitas</a></td>
+            <td><a href="#d-flatbreads">Mini Personal Flatbreads</a></td>
+            <td><a href="#d-chili">Chili + Side Salad</a></td>
           </tr>
           <tr>
             <th class="sticky-col">Snacks</th>
@@ -289,20 +296,20 @@
           </tr>
           <tr>
             <th class="sticky-col">AM Workout</th>
-            <td>Lower body + treadmill (5 min warm-up, 15 min lower, 10 min walk/jog)</td>
-            <td>Upper body + treadmill</td>
-            <td>Full body + short core (30 min only)</td>
-            <td>Lower + treadmill intervals</td>
-            <td>Upper + light treadmill</td>
-            <td>Treadmill intervals + longer core</td>
-            <td>Easy walk + light core/mobility</td>
+            <td><a href="#workouts">Lower body + treadmill</a></td>
+            <td><a href="#workouts">Upper body + treadmill</a></td>
+            <td><a href="#workouts">Full body + short core</a></td>
+            <td><a href="#workouts">Lower + treadmill intervals</a></td>
+            <td><a href="#workouts">Upper + light treadmill</a></td>
+            <td><a href="#workouts">Intervals + longer core</a></td>
+            <td><a href="#workouts">Easy walk + light core</a></td>
           </tr>
           <tr>
             <th class="sticky-col">PM / Extra</th>
-            <td>Optional core (10–15 min)</td>
-            <td>Optional easy walk or mobility</td>
+            <td><a href="#workouts">Optional core (10–15 min)</a></td>
+            <td><a href="#workouts">Optional walk/mobility</a></td>
             <td>Rest (busy)</td>
-            <td>Optional core</td>
+            <td><a href="#workouts">Optional core</a></td>
             <td>Rest (busy)</td>
             <td>Optional family walk</td>
             <td>Rest + meal prep</td>
@@ -321,7 +328,7 @@
         </div>
       </div>
       <div id="mobileDayContent">
-        <!-- Filled by JS -->
+        <!-- Filled by plan.js -->
       </div>
     </div>
   </section>
@@ -330,7 +337,7 @@
   <section class="card" id="recipes-breakfast">
     <h2>Breakfasts</h2>
 
-    <h3>B1 – Banana Protein Shake</h3>
+    <h3 id="b1">B1 – Banana Protein Shake</h3>
     <p class="kcal">~350 kcal • ~25–30g protein</p>
     <ul>
       <li>1 medium banana (fresh or frozen)</li>
@@ -345,7 +352,7 @@
       <li>Blend until smooth and thick. Adjust with water/ice as needed.</li>
     </ol>
 
-    <h3>B2 – Warm Protein Oats</h3>
+    <h3 id="b2">B2 – Warm Protein Oats</h3>
     <p class="kcal">~350–375 kcal • ~25–30g protein</p>
     <ul>
       <li>1/2 cup oats</li>
@@ -361,7 +368,7 @@
       <li>Top with fruit and chia/flax; add sweetener if desired.</li>
     </ol>
 
-    <h3>B3 – Greek Yogurt Power Bowl</h3>
+    <h3 id="b3">B3 – Greek Yogurt Power Bowl</h3>
     <p class="kcal">~350–380 kcal • ~25–30g protein</p>
     <ul>
       <li>3/4–1 cup non-fat or low-fat Greek yogurt</li>
@@ -381,7 +388,7 @@
   <section class="card" id="recipes-lunch">
     <h2>Lunches (Both Batches Made Sunday)</h2>
 
-    <h3>L1 – Turkey Enchilada Skillet Bowls (5 servings)</h3>
+    <h3 id="l1">L1 – Turkey Enchilada Skillet Bowls (5 servings)</h3>
     <p class="kcal">~420 kcal per serving • ~45g protein</p>
     <div class="grid-2">
       <div>
@@ -415,7 +422,7 @@
       </div>
     </div>
 
-    <h3>L2 – Mediterranean Lentil Bowls (5 servings)</h3>
+    <h3 id="l2">L2 – Mediterranean Lentil Bowls (5 servings)</h3>
     <p class="kcal">~400–430 kcal per serving • ~20–25g protein • high fiber</p>
     <div class="grid-2">
       <div>
@@ -453,7 +460,7 @@
   <section class="card" id="recipes-dinner">
     <h2>Dinners (Single-Meal, Easy to Scale)</h2>
 
-    <h3>Teriyaki Salmon + Veggie Stir Fry</h3>
+    <h3 id="d-salmon">Teriyaki Salmon + Veggie Stir Fry</h3>
     <p class="kcal">~500 kcal per person</p>
     <ul>
       <li>5–6 oz salmon per person</li>
@@ -467,7 +474,7 @@
       <li>Serve salmon over veggies; drizzle remaining sauce.</li>
     </ol>
 
-    <h3>Turkey Meatballs + Marinara + Roasted Veg</h3>
+    <h3 id="d-meatballs">Turkey Meatballs + Marinara + Roasted Veg</h3>
     <p class="kcal">~450–500 kcal per person</p>
     <ul>
       <li>5–6 turkey meatballs per person (store-bought or homemade)</li>
@@ -481,7 +488,7 @@
       <li>Warm marinara and pour over meatballs; serve with roasted veg.</li>
     </ol>
 
-    <h3>Fast Taco Night (Lean Beef)</h3>
+    <h3 id="d-tacos">Fast Taco Night (Lean Beef)</h3>
     <p class="kcal">~450–480 kcal per person (depends on tortillas and toppings)</p>
     <ul>
       <li>~1/2 lb lean ground beef shared between two (or 4–5 oz each cooked)</li>
@@ -494,7 +501,7 @@
       <li>Serve in lettuce cups or tortillas with toppings.</li>
     </ol>
 
-    <h3>Greek Turkey Bowls</h3>
+    <h3 id="d-greek-bowl">Greek Turkey Bowls</h3>
     <p class="kcal">~480 kcal per person</p>
     <ul>
       <li>5–6 oz cooked turkey (grilled or pan-cooked)</li>
@@ -508,7 +515,7 @@
       <li>Layer bowl: rice, turkey, chopped veg, tzatziki, optional feta/olives.</li>
     </ol>
 
-    <h3>Sheet Pan Shrimp Fajitas</h3>
+    <h3 id="d-fajitas">Sheet Pan Shrimp Fajitas</h3>
     <p class="kcal">~450 kcal per person (with 2 small tortillas)</p>
     <ul>
       <li>Shrimp (~6–8 oz per person)</li>
@@ -522,7 +529,7 @@
       <li>Serve in tortillas or lettuce with salsa/lime.</li>
     </ol>
 
-    <h3>Mini Personal Flatbreads</h3>
+    <h3 id="d-flatbreads">Mini Personal Flatbreads</h3>
     <p class="kcal">~500 kcal per person (depends on base)</p>
     <ul>
       <li>1 small naan or lavash per person</li>
@@ -537,7 +544,7 @@
       <li>Bake 8–10 min until crisp and melty.</li>
     </ol>
 
-    <h3>Chili + Side Salad</h3>
+    <h3 id="d-chili">Chili + Side Salad</h3>
     <p class="kcal">~500 kcal per person</p>
     <ul>
       <li>Lean ground turkey or beef</li>
@@ -677,142 +684,7 @@
   </section>
 </main>
 
-<script>
-  // Single source of truth for the weekly day-by-day info
-  const weekPlan = [
-    {
-      name: "Monday",
-      breakfast: "B1 – Banana Protein Shake",
-      lunch: "L1 – Turkey Enchilada Skillet Bowl",
-      dinner: "Teriyaki Salmon + Veggie Stir Fry",
-      snacks: "Protein bar; hummus + veggies (as needed)",
-      am: "Lower body + treadmill: 5 min easy walk, 15 min lower strength, 10 min brisk walk/jog.",
-      pm: "Optional core finisher (10–15 min)."
-    },
-    {
-      name: "Tuesday",
-      breakfast: "B2 – Warm Protein Oats",
-      lunch: "L2 – Mediterranean Lentil Bowl",
-      dinner: "Turkey Meatballs + Marinara + Roasted Veg",
-      snacks: "Yogurt; apple + nut butter",
-      am: "Upper body + treadmill: 5 min walk, 15 min upper strength, 10 min moderate treadmill.",
-      pm: "Optional 10–15 min easy walk or mobility."
-    },
-    {
-      name: "Wednesday",
-      breakfast: "B1 – Banana Protein Shake",
-      lunch: "L1 – Turkey Enchilada Skillet Bowl",
-      dinner: "Fast Taco Night (lean ground beef, lettuce/tortillas, salsa).",
-      snacks: "Protein bar; hummus + veggies",
-      am: "Full body + short core (30 min total).",
-      pm: "Rest (busy night)."
-    },
-    {
-      name: "Thursday",
-      breakfast: "B2 – Warm Protein Oats",
-      lunch: "L2 – Mediterranean Lentil Bowl",
-      dinner: "Greek Turkey Bowls",
-      snacks: "Yogurt; apple + nut butter",
-      am: "Lower body + treadmill intervals.",
-      pm: "Optional core (10–15 min)."
-    },
-    {
-      name: "Friday",
-      breakfast: "B1 – Banana Protein Shake",
-      lunch: "L1 – Turkey Enchilada Skillet Bowl",
-      dinner: "Sheet Pan Shrimp Fajitas",
-      snacks: "Protein bar; hummus + veggies",
-      am: "Upper body + light treadmill.",
-      pm: "Rest (busy night)."
-    },
-    {
-      name: "Saturday",
-      breakfast: "B3 – Greek Yogurt Power Bowl",
-      lunch: "L2 – Mediterranean Lentil Bowl",
-      dinner: "Mini Personal Flatbreads",
-      snacks: "Flexible from snack list.",
-      am: "Treadmill intervals + longer core (about 30 min).",
-      pm: "Optional family walk."
-    },
-    {
-      name: "Sunday",
-      breakfast: "B2 – Warm Protein Oats",
-      lunch: "L1 – Turkey Enchilada Skillet Bowl (or L2 if preferred)",
-      dinner: "Chili + Side Salad",
-      snacks: "Light; keep room for chili.",
-      am: "20–30 min easy walk + 10 min light core/mobility.",
-      pm: "Rest + meal prep."
-    }
-  ];
-
-  let currentDayIndex = 0;
-
-  function getTodayIndex() {
-    // JS Date: 0=Sunday, 1=Monday, ...
-    const d = new Date();
-    const jsDay = d.getDay();
-    // Map: Mon=0,...Sun=6
-    const map = {1:0, 2:1, 3:2, 4:3, 5:4, 6:5, 0:6};
-    return map[jsDay] ?? 0;
-  }
-
-  function renderMobileDay() {
-    const day = weekPlan[currentDayIndex];
-    const titleEl = document.getElementById("mobileDayTitle");
-    const contentEl = document.getElementById("mobileDayContent");
-    if (!day || !titleEl || !contentEl) return;
-
-    titleEl.textContent = day.name;
-
-    contentEl.innerHTML = `
-      <details open>
-        <summary>Breakfast</summary>
-        <p>${day.breakfast}</p>
-      </details>
-      <details>
-        <summary>Lunch</summary>
-        <p>${day.lunch}</p>
-      </details>
-      <details>
-        <summary>Dinner</summary>
-        <p>${day.dinner}</p>
-      </details>
-      <details>
-        <summary>Snacks</summary>
-        <p>${day.snacks}</p>
-      </details>
-      <details>
-        <summary>AM Workout</summary>
-        <p>${day.am}</p>
-      </details>
-      <details>
-        <summary>PM / Extra</summary>
-        <p>${day.pm}</p>
-      </details>
-    `;
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    // Set initial current day to today
-    currentDayIndex = getTodayIndex();
-    renderMobileDay();
-
-    const prevBtn = document.getElementById("prevDayBtn");
-    const nextBtn = document.getElementById("nextDayBtn");
-
-    if (prevBtn) {
-      prevBtn.addEventListener("click", function () {
-        currentDayIndex = (currentDayIndex - 1 + weekPlan.length) % weekPlan.length;
-        renderMobileDay();
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener("click", function () {
-        currentDayIndex = (currentDayIndex + 1) % weekPlan.length;
-        renderMobileDay();
-      });
-    }
-  });
-</script>
+<!-- Data + mobile calendar logic -->
+<script src="plan.js"></script>
 </body>
 </html>

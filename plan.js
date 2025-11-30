@@ -213,41 +213,40 @@ function renderGroceryList() {
 // ---------- Copy / Download handlers ----------
 
 function copyGroceryList() {
-  if (!groceryTextData) {
-    alert("Grocery list not ready yet. Try again in a second.");
-    return;
-  }
+  const box = document.getElementById("groceryText");
+  if (!box) return;
 
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard
-      .writeText(groceryTextData)
-      .then(() => {
-        alert("Grocery list copied. Paste into Reminders or Notes.");
-      })
-      .catch((err) => {
-        console.error(err);
-        fallbackCopy(groceryTextData);
-      });
+  const text = box.textContent || box.innerText || "";
+
+  // Modern API path
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+    navigator.clipboard.writeText(text)
+      .then(() => alert("Copied! Open Reminders and paste to create your grocery list."))
+      .catch(() => fallbackCopyText(text));
   } else {
-    fallbackCopy(groceryTextData);
+    // Fallback for older / locked-down browsers
+    fallbackCopyText(text);
   }
 }
 
-function fallbackCopy(text) {
+function fallbackCopyText(text) {
   const textarea = document.createElement("textarea");
   textarea.value = text;
   textarea.style.position = "fixed";
+  textarea.style.top = "-9999px";
   textarea.style.left = "-9999px";
   document.body.appendChild(textarea);
+  textarea.focus();
   textarea.select();
   try {
     document.execCommand("copy");
-    alert("Grocery list copied. Paste into Reminders or Notes.");
+    alert("Copied! Open Reminders and paste to create your grocery list.");
   } catch (e) {
-    alert("Could not copy automatically. Select and copy manually.");
+    alert("Copy failed — you may need to select and copy manually.");
   }
   document.body.removeChild(textarea);
 }
+
 
 function downloadGroceryList() {
   if (!groceryTextData) {

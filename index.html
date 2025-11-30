@@ -5,25 +5,33 @@
   <title>Weekly Weight Loss Plan – 1500 kcal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    /* Global layout / typography */
+    html {
+      scroll-behavior: smooth;
+      /* Reserve space for sticky header when scrolling to anchors */
+      scroll-padding-top: 80px;
+    }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
-      background: #111827;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
       color: #e5e7eb;
       line-height: 1.6;
     }
     header {
-      background: #0f172a;
+      background: linear-gradient(to right, #020617, #0f172a, #111827);
       padding: 16px 24px;
       border-bottom: 1px solid #1f2937;
       position: sticky;
       top: 0;
       z-index: 10;
+      backdrop-filter: blur(10px);
     }
     header h1 {
       margin: 0 0 4px 0;
       font-size: 1.4rem;
+      letter-spacing: 0.03em;
     }
     header p {
       margin: 0;
@@ -40,10 +48,14 @@
       font-size: 0.85rem;
       text-decoration: none;
       color: #e5e7eb;
-      background: #111827;
+      background: #020617;
       border-radius: 999px;
       padding: 4px 10px;
       border: 1px solid #374151;
+      box-shadow: 0 0 0 1px rgba(15,23,42,0.7);
+    }
+    nav a:hover {
+      background: #111827;
     }
     main {
       padding: 24px;
@@ -55,11 +67,13 @@
       border-bottom: 1px solid #374151;
       padding-bottom: 4px;
       font-size: 1.2rem;
+      scroll-margin-top: 90px; /* so anchors stop below header */
     }
     h3 {
       margin-top: 20px;
       font-size: 1rem;
       color: #f9fafb;
+      scroll-margin-top: 90px;
     }
     h4 {
       margin-top: 10px;
@@ -67,11 +81,12 @@
       color: #e5e7eb;
     }
     section.card {
-      background: #020617;
-      border-radius: 12px;
-      padding: 16px 18px;
-      margin-bottom: 16px;
+      background: rgba(2,6,23,0.96);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
       border: 1px solid #1f2937;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.55);
     }
     .grid-2 {
       display: grid;
@@ -84,11 +99,15 @@
     li {
       margin-bottom: 4px;
     }
+
+    /* Table styling */
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 8px;
       font-size: 0.85rem;
+      overflow: hidden;
+      border-radius: 12px;
     }
     th, td {
       border: 1px solid #1f2937;
@@ -108,6 +127,15 @@
     tr:nth-child(even) td {
       background: #020617;
     }
+    .today-col {
+      background: #0b1120 !important;
+      box-shadow: inset 0 0 0 1px #2563eb;
+    }
+    .today-header {
+      background: #111827 !important;
+      box-shadow: inset 0 -2px 0 #2563eb;
+    }
+
     .kcal {
       font-size: 0.8rem;
       color: #9ca3af;
@@ -146,7 +174,7 @@
       font-weight: 600;
     }
     .mobile-day-nav button {
-      background: #111827;
+      background: #020617;
       color: #e5e7eb;
       border-radius: 999px;
       border: 1px solid #374151;
@@ -158,38 +186,16 @@
       background: #1f2937;
     }
 
-    .mobile-person-toggle {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    .mobile-person-toggle button {
-      flex: 1;
-      background: #111827;
-      color: #e5e7eb;
-      border-radius: 999px;
-      border: 1px solid #374151;
-      padding: 4px 10px;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-    .mobile-person-toggle button.active {
-      background: #2563eb;
-      border-color: #2563eb;
-    }
-    .mobile-person-toggle button:hover {
-      background: #1f2937;
-    }
-    .mobile-person-toggle button.active:hover {
-      background: #1d4ed8;
-    }
-
     details {
       background: #020617;
       border-radius: 10px;
       border: 1px solid #1f2937;
       margin-bottom: 8px;
       padding: 6px 10px;
+      transition: background 0.15s ease;
+    }
+    details[open] {
+      background: #020617;
     }
     details summary {
       cursor: pointer;
@@ -226,7 +232,7 @@
 <body>
 <header>
   <h1>Weekly Weight Loss Plan – 1500 kcal Target</h1>
-  <p>Structured meals, alternating lunches, and basement-friendly workouts (Jill &amp; Chris tracks).</p>
+  <p>Structured meals, alternating lunches, and basement-friendly workouts.</p>
   <nav>
     <a href="#calendar">Weekly Calendar</a>
     <a href="#recipes-breakfast">Breakfasts</a>
@@ -246,9 +252,7 @@
       structured days. Two different lunch batches are made on Sunday and then
       alternated through the week.
     </p>
-    <p>
-      Rough daily structure:
-    </p>
+    <p>Rough daily structure:</p>
     <ul>
       <li><strong>Breakfast:</strong> ~350 kcal</li>
       <li><strong>Lunch:</strong> ~400–430 kcal</li>
@@ -280,8 +284,67 @@
             <th>Sun</th>
           </tr>
         </thead>
-        <tbody id="desktopCalendarBody">
-          <!-- Filled by plan.js -->
+        <tbody>
+          <tr>
+            <th class="sticky-col">Breakfast</th>
+            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
+            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
+            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
+            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
+            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
+            <td><a href="#b3">B3 – Greek Yogurt Power Bowl</a></td>
+            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
+          </tr>
+          <tr>
+            <th class="sticky-col">Lunch</th>
+            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
+            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
+            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
+            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
+            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
+            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
+            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a> (or <a href="#l2">L2</a>)</td>
+          </tr>
+          <tr>
+            <th class="sticky-col">Dinner</th>
+            <td><a href="#d-salmon">Teriyaki Salmon + Veggie Stir Fry</a></td>
+            <td><a href="#d-meatballs">Turkey Meatballs + Marinara + Roasted Veg</a></td>
+            <td><a href="#d-tacos">Fast Taco Night (lean beef)</a></td>
+            <td><a href="#d-greek-bowl">Greek Turkey Bowls</a></td>
+            <td><a href="#d-fajitas">Sheet Pan Shrimp Fajitas</a></td>
+            <td><a href="#d-flatbreads">Mini Personal Flatbreads</a></td>
+            <td><a href="#d-chili">Chili + Side Salad</a></td>
+          </tr>
+          <tr>
+            <th class="sticky-col">Snacks</th>
+            <td>Protein bar; hummus + veggies</td>
+            <td>Yogurt; apple + nut butter</td>
+            <td>Protein bar; hummus + veggies</td>
+            <td>Yogurt; apple + nut butter</td>
+            <td>Protein bar; hummus + veggies</td>
+            <td>Flexible from snack list</td>
+            <td>Light, keep room for chili</td>
+          </tr>
+          <tr>
+            <th class="sticky-col">AM Workout</th>
+            <td><a href="#workouts">Lower body + treadmill</a></td>
+            <td><a href="#workouts">Upper body + treadmill</a></td>
+            <td><a href="#workouts">Full body + short core</a></td>
+            <td><a href="#workouts">Lower + treadmill intervals</a></td>
+            <td><a href="#workouts">Upper + light treadmill</a></td>
+            <td><a href="#workouts">Intervals + longer core</a></td>
+            <td><a href="#workouts">Easy walk + light core</a></td>
+          </tr>
+          <tr>
+            <th class="sticky-col">PM / Extra</th>
+            <td><a href="#workouts">Optional core (10–15 min)</a></td>
+            <td><a href="#workouts">Optional walk/mobility</a></td>
+            <td>Rest (busy)</td>
+            <td><a href="#workouts">Optional core</a></td>
+            <td>Rest (busy)</td>
+            <td>Optional family walk</td>
+            <td>Rest + meal prep</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -289,15 +352,11 @@
     <!-- Mobile single-day view -->
     <div class="mobile-calendar">
       <div class="mobile-day-header">
-        <div class="mobile-day-title" id="mobileDayTitle">Monday – Jill</div>
+        <div class="mobile-day-title" id="mobileDayTitle">Monday</div>
         <div class="mobile-day-nav">
           <button id="prevDayBtn">&lt; Prev</button>
           <button id="nextDayBtn">Next &gt;</button>
         </div>
-      </div>
-      <div class="mobile-person-toggle">
-        <button id="personJill" class="active">Jill</button>
-        <button id="personChris">Chris</button>
       </div>
       <div id="mobileDayContent">
         <!-- Filled by plan.js -->

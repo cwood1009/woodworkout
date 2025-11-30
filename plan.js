@@ -264,3 +264,82 @@ function downloadGroceryList() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+// ----------------------------
+// GROCERY LIST GENERATOR
+// ----------------------------
+
+// (Simple static base list created from this week’s recipes)
+// If recipes change, you edit here only.
+const groceryItems = {
+  Produce: [
+    "10–12 bananas",
+    "3–4 cups berries",
+    "3 cucumbers",
+    "2 pints cherry tomatoes",
+    "6–8 bell peppers",
+    "5–6 onions",
+    "1–2 bulbs garlic",
+    "1 bunch cilantro (optional)",
+    "2–3 limes",
+    "2–3 lemons",
+    "Bag of shredded lettuce"
+  ],
+  "Meat / Seafood": [
+    "3 lbs lean ground turkey (L1)",
+    "1 lb lean ground beef (tacos)",
+    "2 salmon fillets (Mon dinner)",
+    "1 lb shrimp (Fri dinner)",
+    "Turkey meatballs (Tue dinner)",
+    "Turkey sausage or turkey pepperoni (flatbreads)"
+  ],
+  Dairy: [
+    "Light Mexican cheese (L1)",
+    "Feta (L2 optional)",
+    "Light mozzarella (flatbreads)",
+    "Greek yogurt (breakfast + snacks)",
+    "Tzatziki (Greek bowls)"
+  ],
+  Pantry: [
+    "Protein powder",
+    "Rolled oats",
+    "Rice (2–3 cups uncooked)",
+    "Black beans (2 cans)",
+    "Lentils (2 cups dry)",
+    "Fire-roasted tomatoes (1 can)",
+    "Enchilada sauce (1 can)",
+    "Marinara (1 jar)",
+    "Corn (frozen or canned)",
+    "Naan or lavash (flatbreads)",
+    "Taco seasoning",
+    "Chili seasoning",
+    "Olive oil",
+    "Salt, pepper, oregano, cumin, paprika"
+  ]
+};
+
+// Render grocery list into HTML
+function renderGroceryList() {
+  const box = document.getElementById("groceryText");
+  if (!box) return;
+
+  let text = "";
+  for (const [section, items] of Object.entries(groceryItems)) {
+    text += section + ":\n";
+    for (const item of items) text += "• " + item + "\n";
+    text += "\n";
+  }
+  box.textContent = text.trim();
+}
+
+// Copy to clipboard (works perfectly when pasted into Apple Reminders as checklist)
+function copyGroceryList() {
+  const box = document.getElementById("groceryText");
+  if (!box) return;
+
+  navigator.clipboard.writeText(box.textContent)
+    .then(() => alert("Copied! Open Reminders and paste to create your grocery list."))
+    .catch(() => alert("Copy failed — your browser may need permission."));
+}
+
+document.addEventListener("DOMContentLoaded", renderGroceryList);

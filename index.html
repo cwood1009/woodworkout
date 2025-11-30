@@ -139,7 +139,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     .mobile-day-title {
       font-size: 1.1rem;
@@ -157,6 +157,33 @@
     .mobile-day-nav button:hover {
       background: #1f2937;
     }
+
+    .mobile-person-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .mobile-person-toggle button {
+      flex: 1;
+      background: #111827;
+      color: #e5e7eb;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      padding: 4px 10px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .mobile-person-toggle button.active {
+      background: #2563eb;
+      border-color: #2563eb;
+    }
+    .mobile-person-toggle button:hover {
+      background: #1f2937;
+    }
+    .mobile-person-toggle button.active:hover {
+      background: #1d4ed8;
+    }
+
     details {
       background: #020617;
       border-radius: 10px;
@@ -199,7 +226,7 @@
 <body>
 <header>
   <h1>Weekly Weight Loss Plan – 1500 kcal Target</h1>
-  <p>Structured meals, alternating lunches, and basement-friendly workouts.</p>
+  <p>Structured meals, alternating lunches, and basement-friendly workouts (Jill &amp; Chris tracks).</p>
   <nav>
     <a href="#calendar">Weekly Calendar</a>
     <a href="#recipes-breakfast">Breakfasts</a>
@@ -253,67 +280,8 @@
             <th>Sun</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th class="sticky-col">Breakfast</th>
-            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
-            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
-            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
-            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
-            <td><a href="#b1">B1 – Banana Protein Shake</a></td>
-            <td><a href="#b3">B3 – Greek Yogurt Power Bowl</a></td>
-            <td><a href="#b2">B2 – Warm Protein Oats</a></td>
-          </tr>
-          <tr>
-            <th class="sticky-col">Lunch</th>
-            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
-            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
-            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
-            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
-            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a></td>
-            <td><a href="#l2">L2 – Mediterranean Lentil Bowl</a></td>
-            <td><a href="#l1">L1 – Turkey Enchilada Skillet Bowl</a> (or <a href="#l2">L2</a>)</td>
-          </tr>
-          <tr>
-            <th class="sticky-col">Dinner</th>
-            <td><a href="#d-salmon">Teriyaki Salmon + Veggie Stir Fry</a></td>
-            <td><a href="#d-meatballs">Turkey Meatballs + Marinara + Roasted Veg</a></td>
-            <td><a href="#d-tacos">Fast Taco Night (lean beef)</a></td>
-            <td><a href="#d-greek-bowl">Greek Turkey Bowls</a></td>
-            <td><a href="#d-fajitas">Sheet Pan Shrimp Fajitas</a></td>
-            <td><a href="#d-flatbreads">Mini Personal Flatbreads</a></td>
-            <td><a href="#d-chili">Chili + Side Salad</a></td>
-          </tr>
-          <tr>
-            <th class="sticky-col">Snacks</th>
-            <td>Protein bar; hummus + veggies</td>
-            <td>Yogurt; apple + nut butter</td>
-            <td>Protein bar; hummus + veggies</td>
-            <td>Yogurt; apple + nut butter</td>
-            <td>Protein bar; hummus + veggies</td>
-            <td>Flexible from snack list</td>
-            <td>Light, keep room for chili</td>
-          </tr>
-          <tr>
-            <th class="sticky-col">AM Workout</th>
-            <td><a href="#workouts">Lower body + treadmill</a></td>
-            <td><a href="#workouts">Upper body + treadmill</a></td>
-            <td><a href="#workouts">Full body + short core</a></td>
-            <td><a href="#workouts">Lower + treadmill intervals</a></td>
-            <td><a href="#workouts">Upper + light treadmill</a></td>
-            <td><a href="#workouts">Intervals + longer core</a></td>
-            <td><a href="#workouts">Easy walk + light core</a></td>
-          </tr>
-          <tr>
-            <th class="sticky-col">PM / Extra</th>
-            <td><a href="#workouts">Optional core (10–15 min)</a></td>
-            <td><a href="#workouts">Optional walk/mobility</a></td>
-            <td>Rest (busy)</td>
-            <td><a href="#workouts">Optional core</a></td>
-            <td>Rest (busy)</td>
-            <td>Optional family walk</td>
-            <td>Rest + meal prep</td>
-          </tr>
+        <tbody id="desktopCalendarBody">
+          <!-- Filled by plan.js -->
         </tbody>
       </table>
     </div>
@@ -321,11 +289,15 @@
     <!-- Mobile single-day view -->
     <div class="mobile-calendar">
       <div class="mobile-day-header">
-        <div class="mobile-day-title" id="mobileDayTitle">Monday</div>
+        <div class="mobile-day-title" id="mobileDayTitle">Monday – Jill</div>
         <div class="mobile-day-nav">
           <button id="prevDayBtn">&lt; Prev</button>
           <button id="nextDayBtn">Next &gt;</button>
         </div>
+      </div>
+      <div class="mobile-person-toggle">
+        <button id="personJill" class="active">Jill</button>
+        <button id="personChris">Chris</button>
       </div>
       <div id="mobileDayContent">
         <!-- Filled by plan.js -->
@@ -684,7 +656,7 @@
   </section>
 </main>
 
-<!-- Data + mobile calendar logic -->
+<!-- Data + calendar logic -->
 <script src="plan.js"></script>
 </body>
 </html>
